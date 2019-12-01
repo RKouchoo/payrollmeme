@@ -48,13 +48,17 @@ class csvImporter:
 
 
 	def loadPayRecords(file):
-		records = []
+		records = [] # list of lists
 
 		with open(file) as csvFile:
 			csvReader = csv.reader(csvFile, delimiter=",")
 
+			count = 0; # so we dont add the array of titles in the csv file.
 			for row in csvReader:
-				print(row)
+				if count > 1:
+					records.append(PayRecord(row[0], row[1], row[2], row[3], row[4]))
+					
+				count += 1
 
 
 		return records
