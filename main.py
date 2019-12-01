@@ -40,41 +40,33 @@ class TaxCalculator:
 	def runTaxCheck(records):
 		earnt = 0
 
-		worker = 0
+		worker = 0 # the amount of workers that are present in the CSV file, set a few lines down 
 		lastWorker = 0
 
-		workerSum = [] # a list of lists relating to the workers in order of "worker 1", 2, 3, 4 etc
- 
+		workerShifts = [] # a list of lists relating to the workers in order of "worker 1", 2, 3, 4 etc
+ 		workerInternationalShifts = []
+
 		for record in records:
-			records[0] = lastWorker
+			records[0].getRecord() = lastWorker
 
 			if worker != lastWorker and lastWorker > worker:
 				worker = lastWorker
 
+
 		workerCount = 1
 		temp = []
 
-		while workerCount <= worker: # create a nested list of the workers jobs and their ID's
+		while workerCount <= worker: # create a nested list of the worker's jobs and their ID's
 			for record in records:
-				if record[0] == workerCount:
+				if record.getRecord() == workerCount:
 					temp.append(record)
-			workerSum.append[temp]
+			workerShifts.append[temp]
 			temp = []
 
 			workerCount += 1 
 
 
-
-		if record.getInternational() == True:
-			earnt = calcHoldayTax(record)
-		else:
-			earnt = calcResTax(record)
-
-		return earnt
-
-
-
-	def calcResTax(record):
+	def calcResTax(list):
 		afterTax = 0
 
 		for bracket in residentList:
@@ -83,7 +75,7 @@ class TaxCalculator:
 		return afterTax
 
 
-	def calcHoldayTax(record):
+	def calcHoldayTax():
 		afterTax = 0
 
 		return afterTax
