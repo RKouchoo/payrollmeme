@@ -33,6 +33,9 @@ csvPath = "import/employee-payroll-data.csv"
 csvPath = os.path.join(os.path.dirname(__file__), csvPath)
 
 
+printToConsole = True # turn on and off consold printing
+
+
 class TaxCalculator:
 
 
@@ -73,21 +76,34 @@ class TaxCalculator:
 
 			workerCount += 1 
 
+		# finally after sorting and splitting we calculate net income
+		resTaxes = calcResTax(workerShifts)
+		holidayTaxes = calcHoldayTax(workerInternationalShifts)
 
-	def calcResTax(list):
+		# now we prepare the data for csv and to be potentially be printed to the console.
+		# creates a console sting as well as csv data 
+
+		dosomethingwithdatahere
+
+
+	def calcResTax(residentList):
+		afterTax = 0
+		residentNetShifts = []
+
+		for resident in residentList:
+			for shift in resident:
+				
+
+
+		return residentNetShifts
+
+
+	def calcHoldayTax(holidayList):
 		afterTax = 0
 
-		for bracket in residentList:
-			extBracket = taxBracketExtrapolator(bracket)
-			
-		return afterTax
 
-
-	def calcHoldayTax():
-		afterTax = 0
 
 		return afterTax
-
 
 
 	def taxBracketExtrapolator(bracket)
