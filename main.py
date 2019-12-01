@@ -3,6 +3,7 @@
 import csv
 import os
 
+
 # resident ratios
 # stored as arrays for use
 # -100 means 64 bit limit or 1.0E+99
@@ -22,6 +23,11 @@ holidayBracket1 = [-1, 37000, 0.15]
 holidayBracket2 = [37000, 90000, 0.32]
 holidayBracket3 = [90000, 180000, 0.37]
 holidayBracket4 = [180000, -100, 0.45]
+
+
+# CSV Path
+csvPath = "import/employee-payroll-data.csv"
+csvPath = os.path.join(os.path.dirname(__file__), csvPath)
 
 
 class TaxCalculator:
@@ -91,8 +97,3 @@ class PayRecord:
 	def getNet():
 		net 
 		return net
-
-
-
-
-csvImporter.loadPayRecords("//import//employee-payroll-data.csv")
