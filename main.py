@@ -15,6 +15,7 @@ residentBracket4 = [932, 1380, 0.345, 41.7311]
 residentBracket5 = [1380, 3111, 0.39, 103.857]
 residentBracket6 = [3111, -100, 0.47, 352.78888]
 
+residentList = [residentBracket1, residentBracket2, residentBracket3, residentBracket4, residentBracket5, residentBracket6]
 
 # holiday ratios
 # -100 means 64 bit limit or 1.0E+99
@@ -23,6 +24,8 @@ holidayBracket1 = [-1, 37000, 0.15]
 holidayBracket2 = [37000, 90000, 0.32]
 holidayBracket3 = [90000, 180000, 0.37]
 holidayBracket4 = [180000, -100, 0.45]
+
+holidayList = [holidayBracket1. holidayBracket2, holidayBracket3, holidayBracket4]
 
 
 # CSV Path
@@ -34,27 +37,62 @@ class TaxCalculator:
 
 
 	# takes a pay record and then runs the correct method for tax to be calculated
-	def runTaxCheck(record):
-
+	def runTaxCheck(records):
 		earnt = 0
 
-		if record.getVisa != 0:
-			earnt = calcResTax()
+		worker = 0
+		lastWorker = 0
 
+		workerSum = [] # a list of lists relating to the workers in order of "worker 1", 2, 3, 4 etc
+ 
+		for record in records:
+			records[0] = lastWorker
+
+			if worker != lastWorker and lastWorker > worker:
+				worker = lastWorker
+
+		workerCount = 1
+		temp = []
+
+		while workerCount <= worker: # create a nested list of the workers jobs and their ID's
+			for record in records:
+				if record[0] == workerCount:
+					temp.append(record)
+			workerSum.append[temp]
+			temp = []
+
+			workerCount += 1 
+
+
+
+		if record.getInternational() == True:
+			earnt = calcHoldayTax(record)
+		else:
+			earnt = calcResTax(record)
 
 		return earnt
 
 
-	def calcResTax(earnt):
+
+	def calcResTax(record):
+		afterTax = 0
+
+		for bracket in residentList:
+			extBracket = taxBracketExtrapolator(bracket)
+			
+		return afterTax
+
+
+	def calcHoldayTax(record):
 		afterTax = 0
 
 		return afterTax
 
 
-	def calcHoldayTax(earnt):
-		afterTax = 0
 
-		return afterTax
+	def taxBracketExtrapolator(bracket)
+		return [bracket[0], bracket[1]]
+
 
 
 class csvImporter:
@@ -77,7 +115,12 @@ class csvImporter:
 
 
 	def createNewPayRecord(id, hours, rates, visa, yearToDate):
-		return PayRecord(id, hours, rates, visa, yearToDate)
+		international = False
+		
+		if visa > 0:
+			international = True
+
+		return PayRecord(self, id, hours, rates, visa, yearToDate, international)
 
 
 
@@ -106,6 +149,10 @@ class PayRecord:
 		thisInternational = international
 
 
+	def calculateSingleGross():
+		return getHours() * getRate()
+
+
 	def getRecord():
 		return thisRecordID
 
@@ -114,7 +161,7 @@ class PayRecord:
 		return thisHours
 
 
-	def getRates():
+	def getRate():
 		return thisRates
 
 
@@ -122,9 +169,15 @@ class PayRecord:
 		return thisVisa
 
 
-	def getYeahToDate():
+	def getYearToDate():
 		return thisYearToDate
-		
+
 
 	def getInternational():
 		return international
+
+
+
+
+# main thread
+
