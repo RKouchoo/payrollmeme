@@ -32,6 +32,19 @@ csvPath = os.path.join(os.path.dirname(__file__), csvPath)
 
 class TaxCalculator:
 
+
+	# takes a pay record and then runs the correct method for tax to be calculated
+	def runTaxCheck(record):
+
+		earnt = 0
+
+		if record.getVisa != 0:
+			earnt = calcResTax()
+
+
+		return earnt
+
+
 	def calcResTax(earnt):
 		afterTax = 0
 
@@ -55,19 +68,23 @@ class csvImporter:
 
 			count = 0; # so we dont add the array of titles in the csv file.
 			for row in csvReader:
-				if count > 1:
-					records.append(PayRecord(row[0], row[1], row[2], row[3], row[4]))
-					
-				count += 1
 
+				if count >= 1:
+					records.append(createNewPayRecord(row[0], row[1], row[2], row[3], row[4]))
+				count += 1
 
 		return records
 
 
 	def createNewPayRecord(id, hours, rates, visa, yearToDate):
-		rec = ""
+		return PayRecord(id, hours, rates, visa, yearToDate)
 
-		return rec
+
+
+class csvWriter:
+
+	def writeToCSV(path, writeToConsole):
+
 
 
 class PayRecord:
@@ -75,29 +92,39 @@ class PayRecord:
 	global thisRecordID
 	global thisHours
 	global thisRates
+	global thisVisa
+	global thisYearToDate
+	global thisInternational
 
 
-	def __init__(self, recordID, hours, rates):
+	def __init__(self, recordID, hours, rates, visa, yearToDate, international):
 		thisRecordID = recordID
 		thisHours = hours
 		thisRates = rates
+		thisVisa = visa
+		thisYearToDate = yearToDate
+		thisInternational = international
 
 
-	def getDetails():
-		details
-		return details
+	def getRecord():
+		return thisRecordID
 
 
-	def getGross():
-		gross
-		return gross
+	def getHours():
+		return thisHours
 
 
-	def getTax():
-		tax
-		return tax
+	def getRates():
+		return thisRates
 
 
-	def getNet():
-		net 
-		return net
+	def getVisa():
+		return thisVisa
+
+
+	def getYeahToDate():
+		return thisYearToDate
+		
+
+	def getInternational():
+		return international
