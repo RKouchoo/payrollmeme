@@ -25,7 +25,7 @@ holidayBracket2 = [37000, 90000, 0.32]
 holidayBracket3 = [90000, 180000, 0.37]
 holidayBracket4 = [180000, -100, 0.45]
 
-holidayList = [holidayBracket1. holidayBracket2, holidayBracket3, holidayBracket4]
+holidayList = [holidayBracket1, holidayBracket2, holidayBracket3, holidayBracket4]
 
 
 # CSV Path
@@ -44,7 +44,7 @@ class TaxCalculator:
 		lastWorker = 0
 
 		workerShifts = [] # a list of lists relating to the workers in order of "worker 1", 2, 3, 4 etc
- 		workerInternationalShifts = []
+ 		workerInternationalShifts = [] # same list but for international workers
 
 		for record in records:
 			records[0].getRecord() = lastWorker
@@ -55,13 +55,21 @@ class TaxCalculator:
 
 		workerCount = 1
 		temp = []
+		iTemp = [] # temp for both types of workers
 
 		while workerCount <= worker: # create a nested list of the worker's jobs and their ID's
 			for record in records:
 				if record.getRecord() == workerCount:
-					temp.append(record)
-			workerShifts.append[temp]
+					if record.getVisa > 0:
+						iTemp.append(records)
+					else:
+						temp.append(record)
+
+
+			workerInternationalShifts.append(iTemp)		
+			workerShifts.append(iTemp)
 			temp = []
+			iTemp = []
 
 			workerCount += 1 
 
